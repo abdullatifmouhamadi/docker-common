@@ -43,11 +43,11 @@ else
   echo "[i] Pretashop already installed...";
 fi
 
-echo "[i] Changing admin directory..."
-sed -i "s|admin/|${PS_FOLDER_ADMIN}/|g" /etc/nginx/nginx.conf
+echo "[i] Changing admin directory... MOUHA"
+#sed -i "s|admin/|${PS_FOLDER_ADMIN}/|g" /etc/nginx/nginx.conf
 
-echo "[i] Changing server name..."
-sed -i "s|www.example.co.uk|${URL}|g" /etc/nginx/nginx.conf
+echo "[i] Changing server name... MOUHA"
+#sed -i "s|www.example.co.uk|${URL}|g" /etc/nginx/nginx.conf
 
 if [ "$CLOUDFLARE_CDN" = "1" ]; then
   echo "[i] Changing Real IP settings..."
