@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  prestashop:
+    image: yobasystems/alpine-prestashop
+    networks:
+      - my_app_net
+    #command: chmod +x /run.sh
+    environment:
+      PS_INSTALL_AUTO: '1'
+      URL: localhost
+      VIRTUAL_HOST: localhost
+      MYSQL_HOST: '172.18.0.2'
+      MYSQL_DATABASE: test_prestashop
+      MYSQL_USER: root
+      MYSQL_PASSWORD: '1234'
+    expose:
+      - '80'
+    ports:
+      - '80:80'
+    volumes:
+      - ./files/nginx.conf:/etc/nginx/nginx.conf
+      - ./files/php-fpm.conf:/etc/php7/php-fpm.conf
+      - ./files/php.ini:/etc/php7/php.ini
+      - ./files/run.sh:/run.sh
+    #restart: always
+networks:
+  my_app_net:
+    external: true
