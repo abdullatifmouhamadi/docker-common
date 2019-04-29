@@ -12,8 +12,9 @@ mariadb:10.4
 
 ```
 # run container and find db ip
-docker run --name test-mariadb --net my_app_net --ip 172.18.0.2 -v test-mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -d mariadb:10.4
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test-mariadb
+docker network create my_app_net
+docker container run --name test-mariadb --net my_app_net --ip 172.18.0.2 -v test-mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -d mariadb:10.4
+docker container inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test-mariadb
 
 # grant access to remote host
 docker container exec -it test-mariadb bash
