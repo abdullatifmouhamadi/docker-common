@@ -1,0 +1,1 @@
+https://github.com/PayU/plugin_prestashop/archive/v3.0.4.tar.gz,payu
