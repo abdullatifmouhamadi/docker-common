@@ -6,7 +6,7 @@ from utils import install
 
 
 
-install(release = '1.7.0.1')
+install(release = '1.7.4.4')
 
 
 
