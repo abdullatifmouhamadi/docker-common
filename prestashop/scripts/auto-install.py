@@ -12,7 +12,7 @@ copy_src(release = '1.7.5.1')
 
 install(domain      = "localhost:9090", 
         db_server   = "localhost", 
-        db_name     = "prestashop5", 
+        db_name     = "prestashop", 
         db_user     = "root", 
         db_password = "root")
 

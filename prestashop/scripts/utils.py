@@ -1,10 +1,10 @@
  # /usr/bin/python
 
-from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php, chmod
+from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php, chmod, mv
 from sh.contrib import git
 import sh, contextlib, os
 from releases import RELEASES, release_filename, REPO, release_extract_dir
-from config import INSTALL_DIR, CACHE_DIR, TMP_DIR
+from config import INSTALL_DIR, CACHE_DIR, TMP_DIR, ADMIN_DIR
 import sys
 
 def log(msg):
@@ -32,9 +32,16 @@ def copy_src(release):
         log( "[i] Extracting {} ".format( filename ) )
         unzip("-n", "-q", filename, "-d", extract_dir)
 
-    log( "[i] Copying files ... " )
+    
+    log( "[i] Removing old files ... " )
     rm("-rf", INSTALL_DIR)
+
+    log( "[i] Copying files ... " )
     unzip("-n", "-q", extract_dir + '/prestashop.zip' , "-d", INSTALL_DIR)
+
+    log( "[i] Renaming admin as {}".format(ADMIN_DIR) )
+    mv(INSTALL_DIR + 'admin', INSTALL_DIR + ADMIN_DIR)
+
     chown("-R", "http:http", INSTALL_DIR)
     chmod("-R", "777", INSTALL_DIR + 'var/')
 
@@ -45,16 +52,19 @@ def install(domain, db_server, db_name, db_user, db_password):
     log( "[i] Installing from index_cli.php ... " )
     cli = INSTALL_DIR + 'install/index_cli.php' 
 
-    php(cli, "--domain={}".format(domain),
-             "--db_server={}".format(db_server),
-             "--db_name={}".format(db_name),
-             "--db_user={}".format(db_user),
-             "--db_password={}".format(db_password),
-             "--db_create=1",
-             "--country=fr",
-             _iter       = True)
+    r = php(cli, "--domain={}".format(domain),
+                 "--db_server={}".format(db_server),
+                 "--db_name={}".format(db_name),
+                 "--db_user={}".format(db_user),
+                 "--db_password={}".format(db_password),
+                 "--db_create=1",
+                 "--language=fr",
+                 "--country=fr")
+    print( r )
 
-             
+    log( "[i] Removing install dir ... " )
+    rm("-rf", INSTALL_DIR + 'install')
+
     chown("-R", "http:http", INSTALL_DIR)
     chmod("-R", "777", INSTALL_DIR + 'var/')
 
