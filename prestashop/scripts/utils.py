@@ -1,6 +1,6 @@
  # /usr/bin/python
 
-from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php
+from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php, chmod
 from sh.contrib import git
 import sh, contextlib, os
 from releases import RELEASES, release_filename, REPO, release_extract_dir
@@ -35,24 +35,28 @@ def copy_src(release):
     log( "[i] Copying files ... " )
     rm("-rf", INSTALL_DIR)
     unzip("-n", "-q", extract_dir + '/prestashop.zip' , "-d", INSTALL_DIR)
-    #chown("-R", "http:http", INSTALL_DIR)
+    chown("-R", "http:http", INSTALL_DIR)
+    chmod("-R", "777", INSTALL_DIR + 'var/')
 
 
 # php ./install-dev/index_cli.php --domain=prestashop.ps --db_server=localhost --db_name=XXXXXXXXXX --db_user=XXXXXXXXXX --db_password="XXXXXXXXXX"
 
 def install(domain, db_server, db_name, db_user, db_password):
-
+    log( "[i] Installing from index_cli.php ... " )
     cli = INSTALL_DIR + 'install/index_cli.php' 
 
-    for line in  php(cli, "--domain={}".format(domain),
-                          "--db_server={}".format(db_server),
-                          "--db_name={}".format(db_name),
-                          "--db_user={}".format(db_user),
-                          "--db_password={}".format(db_password),
-                          "--db_create=1",
-                          _iter       = True):
-        
-        print( line )
+    php(cli, "--domain={}".format(domain),
+             "--db_server={}".format(db_server),
+             "--db_name={}".format(db_name),
+             "--db_user={}".format(db_user),
+             "--db_password={}".format(db_password),
+             "--db_create=1",
+             "--country=fr",
+             _iter       = True)
+
+             
+    chown("-R", "http:http", INSTALL_DIR)
+    chmod("-R", "777", INSTALL_DIR + 'var/')
 
 
 
