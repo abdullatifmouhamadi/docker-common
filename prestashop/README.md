@@ -35,7 +35,9 @@ docker container stop test-prestashop && docker container rm test-prestashop && 
 
 # prestashop auto install
 https://gist.github.com/Ilshidur/5d6425e0b697bd87b8e9b8d195ff1047?fbclid=IwAR25quV5AxT1tI1Sve37M1YHrMgDZO0HAgcOuRxzDoc47KTjpo5apDSMZUA
+
 https://github.com/PrestaShop/docker/issues/109?fbclid=IwAR3mnOAd-NGHUrtFZPZSbYoQEmpiDZLo7AGLedO9DWCsjZ0BkfXgw-CAGtQ
+
 https://gist.github.com/adamczykjac/1d49b1f663a3cb632ba46579bce00897?fbclid=IwAR3UOBkANt-X8batM875M13HDcn35RTi-HcWN-utpumcyVKr7ZRx3zvEDKE
 
-
+https://gist.github.com/julienbourdeau/205df55bcf8aa290bd9e

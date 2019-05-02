@@ -1,6 +1,6 @@
  # /usr/bin/python
 
-from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm
+from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php
 from sh.contrib import git
 import sh, contextlib, os
 from releases import RELEASES, release_filename, REPO, release_extract_dir
@@ -24,7 +24,7 @@ def _pull_release(release):
         wget( REPO + filename, "-O", CACHE_DIR + filename)
 
 
-def install(release):
+def copy_src(release):
     _pull_release(release)
     filename    = CACHE_DIR + release_filename(release)
     extract_dir = CACHE_DIR + release_extract_dir(release)
@@ -35,6 +35,27 @@ def install(release):
     log( "[i] Copying files ... " )
     rm("-rf", INSTALL_DIR)
     unzip("-n", "-q", extract_dir + '/prestashop.zip' , "-d", INSTALL_DIR)
+    #chown("-R", "http:http", INSTALL_DIR)
+
+
+# php ./install-dev/index_cli.php --domain=prestashop.ps --db_server=localhost --db_name=XXXXXXXXXX --db_user=XXXXXXXXXX --db_password="XXXXXXXXXX"
+
+def install(domain, db_server, db_name, db_user, db_password):
+
+    cli = INSTALL_DIR + 'install/index_cli.php' 
+
+    for line in  php(cli, "--domain={}".format(domain),
+                          "--db_server={}".format(db_server),
+                          "--db_name={}".format(db_name),
+                          "--db_user={}".format(db_user),
+                          "--db_password={}".format(db_password),
+                          "--db_create=1",
+                          _iter       = True):
+        
+        print( line )
+
+
+
 
 
 """
