@@ -15,6 +15,9 @@ install(domain      = DOMAIN,
         db_password = MYSQL_PASSWORD)
 
 
-
-
-        
+"""
+# change database_name from '/app/config/parameters.php' then :
+mysql -u root -proot -e "create database prestashop_houda";
+mysqldump -u root -proot prestashop > backup.sql
+mysql -u root -proot prestashop_houda < backup.sql
+"""
