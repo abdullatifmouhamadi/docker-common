@@ -20,4 +20,11 @@ install(domain      = DOMAIN,
 mysql -u root -proot -e "create database prestashop_houda";
 mysqldump -u root -proot prestashop > backup.sql
 mysql -u root -proot prestashop_houda < backup.sql
+
+# external host
+mysql -h 172.18.0.2 -P 3306 -u root -p1234 -e "create database prestashop_houda";
+mysql -h 172.18.0.2 -P 3306 -u root -p1234 prestashop_houda < backup.sql
+
+
 """
+
