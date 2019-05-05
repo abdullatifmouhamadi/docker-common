@@ -4,7 +4,7 @@ from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php, 
 from sh.contrib import git
 import sh, contextlib, os
 from releases import RELEASES, release_filename, REPO, release_extract_dir
-from config import INSTALL_DIR, CACHE_DIR, TMP_DIR, ADMIN_DIR
+from config import INSTALL_DIR, CACHE_DIR, TMP_DIR, ADMIN_DIR, APP_OWNER
 import sys
 
 def log(msg):
@@ -14,7 +14,7 @@ def _pull_release(release):
     if not release in RELEASES:
         raise ValueError('Invalid release')
 
-    filename    = release_filename(release)
+    filename = release_filename(release)
     if not os.path.isdir( CACHE_DIR ):
         log( "[i] Creating cache dir {} ".format( CACHE_DIR ) )
         mkdir("-p", CACHE_DIR )
@@ -36,13 +36,16 @@ def copy_src(release):
     log( "[i] Removing old files ... " )
     rm("-rf", INSTALL_DIR)
 
+    log( "[i] Creating install dir {} ... ".format(INSTALL_DIR) )
+    mkdir("-p", INSTALL_DIR )
+
     log( "[i] Copying files ... " )
     unzip("-n", "-q", extract_dir + '/prestashop.zip' , "-d", INSTALL_DIR)
 
     log( "[i] Renaming admin as {}".format(ADMIN_DIR) )
     mv(INSTALL_DIR + 'admin', INSTALL_DIR + ADMIN_DIR)
 
-    chown("-R", "http:http", INSTALL_DIR)
+    chown("-R", APP_OWNER, INSTALL_DIR)
     chmod("-R", "777", INSTALL_DIR + 'var/')
 
 
@@ -65,7 +68,7 @@ def install(domain, db_server, db_name, db_user, db_password):
     log( "[i] Removing install dir ... " )
     rm("-rf", INSTALL_DIR + 'install')
 
-    chown("-R", "http:http", INSTALL_DIR)
+    chown("-R", APP_OWNER, INSTALL_DIR)
     chmod("-R", "777", INSTALL_DIR + 'var/')
 
 

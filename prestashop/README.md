@@ -8,7 +8,7 @@ yobasystems/alpine-prestashop
 
 ```
 # -v test-prestashop:/usr/html
-
+# -v $(pwd):/usr/share/nginx/html
 docker run --name test-prestashop \
 -e PS_INSTALL_AUTO="1" \
 -e URL="localhost" \
@@ -17,6 +17,10 @@ docker run --name test-prestashop \
 -e MYSQL_DATABASE="test_prestashop" \
 -e MYSQL_USER="root" \
 -e MYSQL_PASSWORD="1234" \
+--mount type=bind,source=/home/prestashopd,target=/home/prestashopd \
+--mount type=bind,source=$(pwd),target=/scripts \
+--net my_app_net \
+-p 8080:8080 \
 -d yobasystems/alpine-prestashop
 
 
@@ -31,6 +35,13 @@ docker container stop test-prestashop && docker container rm test-prestashop && 
 
 ```
 
+# my
+```
+apk update && apk add --no-cache python3 && pip3 install --no-cache-dir --upgrade pip && pip3 install sh
+
+
+
+```
 
 
 # prestashop auto install

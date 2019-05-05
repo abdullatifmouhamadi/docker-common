@@ -2,8 +2,8 @@
 
 
 INSTALL_DIR    = '/srv/http/dockpresta/app/'
-CACHE_DIR      = '/srv/http/dockpresta/presta-cache/'
-TMP_DIR        = '/srv/http/dockpresta/presta-tmp/'
+CACHE_DIR      = '/home/prestashopd/cache/' #'/srv/http/dockpresta/presta-cache/'
+TMP_DIR        = '/home/prestashopd/tmp/' #'/srv/http/dockpresta/presta-tmp/'
 ADMIN_DIR      = 'console'
 
 
@@ -15,3 +15,4 @@ MYSQL_PASSWORD = 'root'
 
 DOMAIN         = 'localhost:9090'
 
+APP_OWNER      = 'nginx:nginx'

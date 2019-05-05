@@ -7,12 +7,19 @@ from config import ( MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, DOM
 copy_src(release = '1.7.5.1')
 # copy_src(release = '1.7.4.4')
 
-
+"""
 install(domain      = DOMAIN, 
         db_server   = MYSQL_HOST, 
         db_name     = MYSQL_DATABASE, 
         db_user     = MYSQL_USER, 
         db_password = MYSQL_PASSWORD)
+"""
+# docker
+install(domain      = 'localhost:8080', 
+        db_server   = '172.18.0.2',
+        db_name     = 'prestashop1751', 
+        db_user     = 'root', 
+        db_password = '1234')
 
 
 """
