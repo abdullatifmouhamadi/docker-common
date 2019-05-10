@@ -47,16 +47,15 @@ def create_dummy_certificate(domains):
     path = "/etc/letsencrypt/live/" + base_domain
 
     sh.cd( CERTBOT_BASE_DIR )
-    command = "openssl req -x509 -nodes -newkey rsa:1024 -days 1 \
-                -keyout '{}/privkey.pem' \
-                -out '{}/fullchain.pem' \
-                -subj '/CN=localhost'".format(path, path)
+    command = '"'+"openssl req -x509 -nodes -newkey rsa:1024 -days 1 -keyout '{}/privkey.pem' -out '{}/fullchain.pem' -subj '/CN=localhost'".format(path, path) + '"'
+
+    print(sh.pwd())
+    #a = sh.docker_compose("run", "--rm", "--entrypoint",  '"'+command+'"', 'certbot')
+    line = sh.docker_compose("run", "--rm", "--entrypoint", command ,'certbot')
+    print(line)
 
 
-    sh.docker_compose("run --rm --entrypoint " + '"'+command+'"' + ' certbot')
-
-
-"""
+"""S
 def domain_exists(domain_name):
     pass
 """
