@@ -1,0 +1,40 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+ADMIN_DIR	../prestashop/scripts/config.py	/^ADMIN_DIR      = 'console'$/;"	kind:variable	line:7
+APP_OWNER	../prestashop/scripts/config.py	/^APP_OWNER      = 'nginx:nginx'/;"	kind:variable	line:18
+CACHE_DIR	../prestashop/scripts/config.py	/^CACHE_DIR      = '\/home\/prestashopd\/cache\/' #'\/srv\/http\/dockpresta\/presta-cache\/'$/;"	kind:variable	line:5
+CERTBOT_BASE_DIR	../nginx-certbot/scripts/config.py	/^CERTBOT_BASE_DIR     = '\/home\/prestashopd'$/;"	kind:variable	line:3
+CERTBOT_CONF_DIR	../nginx-certbot/scripts/config.py	/^CERTBOT_CONF_DIR     = CERTBOT_BASE_DIR + '\/data\/certbot\/conf\/'$/;"	kind:variable	line:4
+CERTBOT_NGINX_DIR	../nginx-certbot/scripts/config.py	/^CERTBOT_NGINX_DIR    = CERTBOT_BASE_DIR + '\/data\/nginx\/'$/;"	kind:variable	line:6
+CERTBOT_RSA_KEY_SIZE	../nginx-certbot/scripts/config.py	/^CERTBOT_RSA_KEY_SIZE = 4096$/;"	kind:variable	line:7
+CERTBOT_WWW_DIR	../nginx-certbot/scripts/config.py	/^CERTBOT_WWW_DIR      = CERTBOT_BASE_DIR + '\/data\/certbot\/www\/'$/;"	kind:variable	line:5
+DOMAIN	../prestashop/scripts/config.py	/^DOMAIN         = 'localhost:9090'$/;"	kind:variable	line:16
+INSTALL_DIR	../prestashop/scripts/config.py	/^INSTALL_DIR    = '\/srv\/http\/dockpresta\/app\/'$/;"	kind:variable	line:4
+MYSQL_DATABASE	../prestashop/scripts/config.py	/^MYSQL_DATABASE = 'prestashop'$/;"	kind:variable	line:11
+MYSQL_HOST	../prestashop/scripts/config.py	/^MYSQL_HOST     = 'localhost'$/;"	kind:variable	line:10
+MYSQL_PASSWORD	../prestashop/scripts/config.py	/^MYSQL_PASSWORD = 'root'$/;"	kind:variable	line:13
+MYSQL_USER	../prestashop/scripts/config.py	/^MYSQL_USER     = 'root'$/;"	kind:variable	line:12
+RELEASES	../prestashop/scripts/releases.py	/^RELEASES = [$/;"	kind:variable	line:2
+REPO	../prestashop/scripts/releases.py	/^REPO     = 'https:\/\/download.prestashop.com\/download\/releases\/'$/;"	kind:variable	line:1
+TMP_DIR	../prestashop/scripts/config.py	/^TMP_DIR        = '\/home\/prestashopd\/tmp\/' #'\/srv\/http\/dockpresta\/presta-tmp\/'$/;"	kind:variable	line:6
+_pull_release	../prestashop/scripts/utils.py	/^def _pull_release(release):$/;"	kind:function	line:13
+auto-install.py	../prestashop/scripts/auto-install.py	1;"	kind:file	line:1
+certbot.py	../nginx-certbot/scripts/certbot.py	1;"	kind:file	line:1
+config.py	../nginx-certbot/scripts/config.py	1;"	kind:file	line:1
+config.py	../prestashop/scripts/config.py	1;"	kind:file	line:1
+copy_src	../prestashop/scripts/utils.py	/^def copy_src(release):$/;"	kind:function	line:27
+create_dummy_certificate	../nginx-certbot/scripts/certbot.py	/^def create_dummy_certificate(domains):$/;"	kind:function	line:39
+init_certbot_env	../nginx-certbot/scripts/certbot.py	/^def init_certbot_env():$/;"	kind:function	line:12
+install	../prestashop/scripts/utils.py	/^def install(domain, db_server, db_name, db_user, db_password):$/;"	kind:function	line:54
+log	../prestashop/scripts/utils.py	/^def log(msg):$/;"	kind:function	line:10
+logi	../nginx-certbot/scripts/certbot.py	/^def logi(msg):$/;"	kind:function	line:9
+release_extract_dir	../prestashop/scripts/releases.py	/^def release_extract_dir(release):$/;"	kind:function	line:75
+release_filename	../prestashop/scripts/releases.py	/^def release_filename(release):$/;"	kind:function	line:72
+releases.py	../prestashop/scripts/releases.py	1;"	kind:file	line:1
+test.py	../nginx-certbot/scripts/test.py	1;"	kind:file	line:1
+utils.py	../prestashop/scripts/utils.py	1;"	kind:file	line:1
