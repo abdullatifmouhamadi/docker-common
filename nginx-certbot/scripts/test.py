@@ -1,7 +1,11 @@
  # /usr/bin/python
 import sh
-from certbot import init_certbot_env, create_dummy_certificate
+from certbot import request_certificate
 
-init_certbot_env()
 
-create_dummy_certificate(['example.com', 'www.example.com'])
+
+request_certificate(domains=['maoredev.com', 'www.maoredev.com'], email="maoredev.biachara@gmail.com", staging=0)
+
+
+
+
