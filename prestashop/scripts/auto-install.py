@@ -3,8 +3,10 @@
 from utils import copy_src, install
 from config import ( MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, DOMAIN )
 
+
+install_dir = '/home/prestashopd/app/'
 # 1.7.5.1
-copy_src(release = '1.7.5.1')
+copy_src(installDir = install_dir, release = '1.7.5.1')
 # copy_src(release = '1.7.4.4')
 
 """
@@ -15,7 +17,8 @@ install(domain      = DOMAIN,
         db_password = MYSQL_PASSWORD)
 """
 # docker
-install(domain      = 'localhost:8080', 
+install(installDir  = install_dir, 
+        domain      = 'localhost:8080', 
         db_server   = '172.18.0.2',
         db_name     = 'prestashop1751', 
         db_user     = 'root', 

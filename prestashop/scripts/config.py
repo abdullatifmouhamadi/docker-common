@@ -1,7 +1,7 @@
 
 
 
-INSTALL_DIR    = '/srv/http/dockpresta/app/'
+#INSTALL_DIR    = '/srv/http/dockpresta/app/'
 CACHE_DIR      = '/home/prestashopd/cache/' #'/srv/http/dockpresta/presta-cache/'
 TMP_DIR        = '/home/prestashopd/tmp/' #'/srv/http/dockpresta/presta-tmp/'
 ADMIN_DIR      = 'console'
