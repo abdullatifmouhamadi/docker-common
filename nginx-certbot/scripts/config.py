@@ -1,5 +1,10 @@
 
 
+
+
+
+
+
 CERTBOT_BASE_DIR     = '/home/prestashopd'
 CERTBOT_CONF_DIR     = CERTBOT_BASE_DIR + '/data/certbot/conf/'
 CERTBOT_WWW_DIR      = CERTBOT_BASE_DIR + '/data/certbot/www/'
