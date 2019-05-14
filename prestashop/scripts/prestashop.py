@@ -7,8 +7,11 @@ from releases import RELEASES, release_filename, REPO, release_extract_dir
 from config import CACHE_DIR, TMP_DIR, ADMIN_DIR, APP_OWNER
 import sys
 
+def logi(msg):
+    print( "[info] => " + msg )
+
 def log(msg):
-    print( echo( msg ) )
+    print( "[info] => " + msg )
 
 def _pull_release(release):
     if not release in RELEASES:
@@ -45,7 +48,7 @@ def copy_src(installDir, release):
     log( "[i] Renaming admin as {}".format(ADMIN_DIR) )
     mv(installDir + 'admin', installDir + ADMIN_DIR)
 
-    #chown("-R", APP_OWNER, installDir)
+    chown("-R", APP_OWNER, installDir)
     chmod("-R", "777", installDir + 'var/')
 
 

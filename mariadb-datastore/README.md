@@ -11,6 +11,12 @@ mariadb:10.4
 # Connecting to MariaDB from Outside the Container
 
 ```
+# run container
+docker container run --name test-mariadb -v test-mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -d mariadb:10.4
+
+
+
+
 # run container and find db ip
 docker network create my_app_net
 docker container run --name test-mariadb --net my_app_net --ip 172.18.0.2 -v test-mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234 -d mariadb:10.4

@@ -15,4 +15,4 @@ MYSQL_PASSWORD = 'root'
 
 DOMAIN         = 'localhost:9090'
 
-APP_OWNER      = 'nginx:nginx'
+APP_OWNER      = 'abdullatif:wheel'#'nginx:nginx'
