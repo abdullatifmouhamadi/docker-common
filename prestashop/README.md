@@ -39,6 +39,28 @@ docker container stop test-prestashop && docker container rm test-prestashop && 
 ```
 apk update && apk add --no-cache python3 && pip3 install --no-cache-dir --upgrade pip && pip3 install sh
 
+```
+
+
+# manual build
+```
+docker container run --name presta -it alpine sh
+
+
+
+docker image build -t prestashop1751 /home/prestashopd/instances/1.7.5.1/
+docker container run --name presta -p 9095:80 -d prestashop1751
+
+docker container run --rm -it sh prestashop1751
+
+
+docker container logs presta
+docker container exec -it presta sh
+
+
+
+
+docker container rm presta
 
 
 ```
