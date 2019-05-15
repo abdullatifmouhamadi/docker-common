@@ -3,10 +3,10 @@
 from prestashop import copy_src, install
 from config import ( MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, DOMAIN )
 import sh, os
-from sh import mysqldump
+from sh import mysqldump, cp
 from prestashop import logi
 
-release       = '1.7.5.0'
+release       = '1.7.5.1'
 instances_dir = '/home/prestashopd/instances/'
 release_dir   = instances_dir + release
 install_dir   = release_dir + '/app/'
@@ -23,6 +23,9 @@ def dump_database(db_user, db_password):
     mysqldump("-u", db_user, "-p" + db_password, src_database, '--result-file', target )
 
 
+def copy_templates():
+    cp("-arf", './images/files', release_dir)
+    cp("./images/Dockerfile", release_dir)
 
 
 if not os.path.isdir( install_dir ):
@@ -41,6 +44,8 @@ if not os.path.isdir( install_dir ):
 else:
     loge( "The instance '{}' ".format(release) + 'already exist ...' )
 
+
+copy_templates()
 
 
 
