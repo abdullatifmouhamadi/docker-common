@@ -1,4 +1,4 @@
-FROM yobasystems/alpine:3.9.2-amd64
+FROM alpine:3.9.4
 LABEL maintainer="ABDULLATIF Mouhamadi <abdullatif.mouhamadi@gmail.com>"
 
 ENV URL="www.example.com" \
@@ -13,7 +13,7 @@ ENV URL="www.example.com" \
     MYSQL_PASSWORD=""
 
 RUN apk update && \
-    apk add bash less vim geoip nginx nginx-mod-http-headers-more nginx-mod-http-geoip nginx-mod-stream nginx-mod-stream-geoip ca-certificates git tzdata zip \
+    apk add bash nano less vim geoip nginx nginx-mod-http-headers-more nginx-mod-http-geoip nginx-mod-stream nginx-mod-stream-geoip ca-certificates git tzdata zip \
     libmcrypt-dev zlib-dev gmp-dev \
     freetype-dev libjpeg-turbo-dev libpng-dev \
     php7-fpm php7-json php7-zlib php7-xml php7-pdo php7-phar php7-openssl php7-fileinfo php7-imagick \
@@ -27,6 +27,8 @@ RUN sed -i "s/nginx:x:100:101:nginx:\/var\/lib\/nginx:\/sbin\/nologin/nginx:x:10
     sed -i "s/nginx:x:100:101:nginx:\/var\/lib\/nginx:\/sbin\/nologin/nginx:x:100:101:nginx:\/usr:\/bin\/bash/g" /etc/passwd- && \
     ln -s /sbin/php-fpm7 /sbin/php-fpm
 
+VOLUME ["/usr/html"]
+
 COPY app/ /usr/html/
 
 ADD files/nginx.conf /etc/nginx/
@@ -37,6 +39,5 @@ ADD files/run.sh /
 RUN chmod +x /run.sh
 
 EXPOSE 80
-VOLUME ["/usr/html"]
 
 CMD ["/run.sh"]
