@@ -3,7 +3,7 @@
 from prestashop import copy_src, install
 from config import ( MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, DOMAIN )
 import sh, os
-from sh import mysqldump, cp
+from sh import mysqldump, cp, mysql
 from prestashop import logi
 
 release       = '1.7.5.1'
@@ -23,17 +23,32 @@ def dump_database(db_user, db_password):
     mysqldump("-u", db_user, "-p" + db_password, src_database, '--result-file', target )
 
 
+def remove_database(db_user, db_password, db_name):
+    logi("Removing db '{}' ...".format(db_name))
+    mysql("-u", db_user, "-p" + db_password , "-e", "DROP DATABASE IF EXISTS {}".format( db_name ) )
+
+
+def duplicate_db(src_dump, target_db):
+
+
+    pass
+
+
 def copy_templates():
     cp("-arf", './images/files', release_dir)
     cp("./images/Dockerfile", release_dir)
 
 
 if not os.path.isdir( install_dir ):
-    # 1.7.5.1
+
+    remove_database('root', 'root', database_name)
+
     copy_src(installDir = install_dir, release = release)
 
+    
+
     install(installDir  = install_dir, 
-            domain      = 'localhost', 
+            domain      = 'localhost:9095', 
             db_server   = 'localhost',
             db_name     = database_name, 
             db_user     = 'root', 
