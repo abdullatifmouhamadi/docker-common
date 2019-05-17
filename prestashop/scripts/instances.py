@@ -80,7 +80,7 @@ def setup(release):
         dump_database(release, db_user = MYSQL_USER, db_password = MYSQL_PASSWORD)
 
     else:
-        loge( "The instance '{}' ".format(release) + 'already exist ...' )
+        logi( "The instance '{}' ".format(release) + 'already exist ...' )
 
 
     copy_templates(release)

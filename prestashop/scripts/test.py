@@ -1,20 +1,27 @@
 
 from instances import setup as setup_instance
-from prestashopd import init_domain
+from prestashopd import init_domain, copy_db
 
 
 r = '1.7.5.2'
+d = 'mouha.biachara.com'
 setup_instance(release = r)
 
-init_domain(domain = 'mouha.biachara.com', release = r)
+init_domain(domain = d, release = r)
 
 
 db_config = {
-    'MYSQL_HOST':'172.17.0.3',
+    'MYSQL_HOST':'172.17.0.2',
     'MYSQL_DATABASE':'prestashop_gedo',
     'MYSQL_USER':'root',
     'MYSQL_PASSWORD':'1234',
 }
+
+copy_db(db_config, d, r)
+
+
+
+
 
 
 
