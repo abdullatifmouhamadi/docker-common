@@ -3,7 +3,7 @@ from sh import ls, printenv, Command, echo, chown, mkdir, wget, unzip, rm, php, 
 import sh, contextlib, os
 from config import PRESTASHOPD_USERS_DIR
 import sys
-from utils import logi
+from utils import logi, loge
 from instances import dump_path, _dump_filename
 
 from sh import cp, sed, mysql
@@ -46,25 +46,33 @@ def init_domain(domain, release):
 
 
 
-def copy_db(db, domain, release):
-
-    #mysql -h 172.18.0.2 -P 3306 -u root -p1234 -e "create database prestashop_houda";
-    #mysql -h 172.18.0.2 -P 3306 -u root -p1234 prestashop_houda < backup.sql
-
+def remove_db(db, domain, release):
     logi("Removing db '{}' ...".format(db['MYSQL_DATABASE']))
     sql(db, request = "DROP DATABASE IF EXISTS {}".format( db['MYSQL_DATABASE'] ))
 
-    logi("Creating db '{}' ...".format(db['MYSQL_DATABASE']))
-    sql(db, request = "CREATE DATABASE {}".format( db['MYSQL_DATABASE'] ))
+def db_exists(db):
+    r = sql(db, request = "SHOW DATABASES LIKE '{}';".format( db['MYSQL_DATABASE'] ))
+    if r == "":
+        return False
+    return True
 
-    copied_sqldump_file = sql_filepath(domain, release)
-    logi("Importing dump file '{}' to database {}...".format(copied_sqldump_file, db['MYSQL_DATABASE']))
-    #mysql("-h", db['MYSQL_HOST'], '-P', '3306', "-u", db['MYSQL_USER'], "-p" + db['MYSQL_PASSWORD'] , db['MYSQL_DATABASE'], '<', copied_sqldump_file )
-    mysql("-h", db['MYSQL_HOST'], '-P', '3306', "-u", db['MYSQL_USER'], "-p" + db['MYSQL_PASSWORD'] , db['MYSQL_DATABASE'], _in = sh.cat(copied_sqldump_file) )
-    
+
+def copy_db(db, domain, release):
+
+    if db_exists(db):
+        loge("Database '{}' already exists".format(db['MYSQL_DATABASE']))
+    else:
+        logi("Creating db '{}' ...".format(db['MYSQL_DATABASE']))
+        sql(db, request = "CREATE DATABASE {}".format( db['MYSQL_DATABASE'] ))
+
+        copied_sqldump_file = sql_filepath(domain, release)
+        logi("Importing dump file '{}' to database {}...".format(copied_sqldump_file, db['MYSQL_DATABASE']))
+        #mysql("-h", db['MYSQL_HOST'], '-P', '3306', "-u", db['MYSQL_USER'], "-p" + db['MYSQL_PASSWORD'] , db['MYSQL_DATABASE'], '<', copied_sqldump_file )
+        mysql("-h", db['MYSQL_HOST'], '-P', '3306', "-u", db['MYSQL_USER'], "-p" + db['MYSQL_PASSWORD'] , db['MYSQL_DATABASE'], _in = sh.cat(copied_sqldump_file) )
+
 
 def sql(db, request):
-    mysql("-h", db['MYSQL_HOST'], '-P', '3306', "-u", db['MYSQL_USER'], "-p" + db['MYSQL_PASSWORD'] , "-e", request )
+    return mysql("-h", db['MYSQL_HOST'], '-P', '3306', "-u", db['MYSQL_USER'], "-p" + db['MYSQL_PASSWORD'] , "-e", request )
 
 
 

@@ -1,5 +1,5 @@
 
-from instances import setup as setup_instance
+from instances import setup as setup_instance, build_image
 from prestashopd import init_domain, copy_db
 
 
@@ -12,13 +12,12 @@ init_domain(domain = d, release = r)
 
 db_config = {
     'MYSQL_HOST':'172.17.0.2',
-    'MYSQL_DATABASE':'prestashop_gedo',
+    'MYSQL_DATABASE':'prestashop1752_ilyan',
     'MYSQL_USER':'root',
     'MYSQL_PASSWORD':'1234',
 }
-
 copy_db(db_config, d, r)
-
+build_image(r)
 
 
 
