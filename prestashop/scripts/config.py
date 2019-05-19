@@ -17,7 +17,7 @@ MYSQL_PASSWORD = 'root'
 
 
 
-DOMAIN_NAME    = 'my_very_unique.domain.com'
+DOMAIN_NAME    = 'localhost'
 
 
 
