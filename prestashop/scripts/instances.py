@@ -103,3 +103,4 @@ def build_image(release):
         logi("Building docker image {}".format(image_name))
         for line in docker('image', 'build', '-t', image_name, release_dir, _iter=True):
             logi(line)
+

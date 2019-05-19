@@ -7,11 +7,7 @@ from releases import RELEASES, release_filename, REPO, release_extract_dir
 from config import CACHE_DIR, TMP_DIR, ADMIN_DIR, APP_OWNER
 import sys
 
-def logi(msg):
-    print( "[info] => " + msg )
-
-def log(msg):
-    print( "[info] => " + msg )
+from utils import log
 
 def _pull_release(release):
     if not release in RELEASES:
@@ -19,11 +15,11 @@ def _pull_release(release):
 
     filename = release_filename(release)
     if not os.path.isdir( CACHE_DIR ):
-        log( "[i] Creating cache dir {} ".format( CACHE_DIR ) )
+        log( "Creating cache dir {} ".format( CACHE_DIR ) )
         mkdir("-p", CACHE_DIR )
 
     if not os.path.exists( CACHE_DIR + filename ):
-        log( "[i] Downloading release {} ".format( filename ) )
+        log( "Downloading release {} ".format( filename ) )
         wget( REPO + filename, "-O", CACHE_DIR + filename)
 
 
@@ -32,20 +28,20 @@ def copy_src(installDir, release):
     filename    = CACHE_DIR + release_filename(release)
     extract_dir = CACHE_DIR + release_extract_dir(release)
     if not os.path.isdir( extract_dir ):
-        log( "[i] Extracting {} ".format( filename ) )
+        log( "Extracting {} ".format( filename ) )
         unzip("-n", "-q", filename, "-d", extract_dir)
 
     
-    log( "[i] Removing old files ... " )
+    log( "Removing old files ... " )
     rm("-rf", installDir)
 
-    log( "[i] Creating install dir {} ... ".format(installDir) )
+    log( "Creating install dir {} ... ".format(installDir) )
     mkdir("-p", installDir )
 
-    log( "[i] Copying files ... " )
+    log( "Copying files ... " )
     unzip("-n", "-q", extract_dir + '/prestashop.zip' , "-d", installDir)
 
-    log( "[i] Renaming admin as {}".format(ADMIN_DIR) )
+    log( "Renaming admin as {}".format(ADMIN_DIR) )
     mv(installDir + 'admin', installDir + ADMIN_DIR)
 
     chown("-R", APP_OWNER, installDir)
@@ -55,7 +51,7 @@ def copy_src(installDir, release):
 # php ./install-dev/index_cli.php --domain=prestashop.ps --db_server=localhost --db_name=XXXXXXXXXX --db_user=XXXXXXXXXX --db_password="XXXXXXXXXX"
 
 def install(installDir, domain, db_server, db_name, db_user, db_password):
-    log( "[i] Installing from index_cli.php ... " )
+    log( "Installing from index_cli.php ... " )
     cli = installDir + 'install/index_cli.php' 
 
     r = php(cli, "--domain={}".format(domain),
@@ -68,7 +64,7 @@ def install(installDir, domain, db_server, db_name, db_user, db_password):
                  "--country=fr")
     print( r )
 
-    log( "[i] Removing install dir ... " )
+    log( "Removing install dir ... " )
     rm("-rf", installDir + 'install')
 
     chown("-R", APP_OWNER, installDir)

@@ -74,3 +74,23 @@ https://github.com/PrestaShop/docker/issues/109?fbclid=IwAR3mnOAd-NGHUrtFZPZSbYo
 https://gist.github.com/adamczykjac/1d49b1f663a3cb632ba46579bce00897?fbclid=IwAR3UOBkANt-X8batM875M13HDcn35RTi-HcWN-utpumcyVKr7ZRx3zvEDKE
 
 https://gist.github.com/julienbourdeau/205df55bcf8aa290bd9e
+
+
+# to deploy
+
+```
+docker run --detach \
+--name presta \
+--publish 9095:80 \
+--mount type=bind,source=/home/prestashopd/domains/localhost:9095/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+prestashop1752:latest
+
+
+
+docker container exec -it presta bash
+
+
+docker container rm presta
+
+
+```
