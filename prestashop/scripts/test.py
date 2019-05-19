@@ -27,6 +27,11 @@ build_image(user_config['PRESTASHOP_RELEASE'])
 
 
 
+# todo
+"""
+chmod -R 777 /usr/html/var
+
+"""
 
 # install php
 """
