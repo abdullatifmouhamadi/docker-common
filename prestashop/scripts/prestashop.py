@@ -60,6 +60,9 @@ def install(installDir, domain, db_server, db_name, db_user, db_password):
                  "--db_user={}".format(db_user),
                  "--db_password={}".format(db_password),
                  "--db_create=1",
+                 "--ssl=1",
+                 "--email=admin@biachara.com",
+                 "--password=admin",
                  "--language=fr",
                  "--country=fr")
     print( r )

@@ -49,4 +49,20 @@ nginx
 
 
 
+# prestashop mount
+docker run --detach \
+--name douka-prive.biachara.com \
+--env "VIRTUAL_HOST=www.douka-prive.biachara.com,douka-prive.biachara.com" \
+--env "LETSENCRYPT_HOST=www.douka-prive.biachara.com,douka-prive.biachara.com" \
+--env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
+--mount type=bind,source=/home/prestashopd/domains/douka-prive.biachara.com/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+prestashop1752:latest
+
+
+
+
+
+
+
+
 ```

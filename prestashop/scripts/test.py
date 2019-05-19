@@ -28,6 +28,18 @@ build_image(user_config['PRESTASHOP_RELEASE'])
 
 
 
+# install php
+"""
+php php-gd php-intl
+
+
+/etc/php/php.ini
+curl,zip
+gd, iconv, intl, pdo_mysql
+
+"""
+
+
 """
 # change database_name from '/app/config/parameters.php' then :
 mysql -u root -proot -e "create database prestashop_houda";

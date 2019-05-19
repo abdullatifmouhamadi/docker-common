@@ -87,6 +87,8 @@ prestashop1752:latest
 
 
 
+
+
 docker container exec -it presta bash
 
 
