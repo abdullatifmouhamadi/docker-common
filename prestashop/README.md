@@ -81,9 +81,9 @@ https://gist.github.com/julienbourdeau/205df55bcf8aa290bd9e
 ```
 docker run --detach \
 --name presta \
---publish 9095:80 \
---mount type=bind,source=/home/prestashopd/domains/localhost:9095/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
-prestashop1752:latest
+--publish 9086:80 \
+--mount type=bind,source=/home/prestashopd/domains/localhost:9086/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+prestashop1760:latest
 
 
 

@@ -3,13 +3,13 @@ from instances import setup as setup_instance, build_image
 from prestashopd import init_domain, copy_db
 
 user_config = {
-    'HOST_DOMAIN':'douka-prive.biachara.com',
-    'PRESTASHOP_RELEASE':'1.7.5.2',
+    'HOST_DOMAIN':'localhost:9086',#'douka-prive.biachara.com',
+    'PRESTASHOP_RELEASE':'1.7.6.0',
 }
 
 db_config = {
     'MYSQL_HOST':'172.17.0.2',
-    'MYSQL_DATABASE':'prestashop1752_douka_prive',
+    'MYSQL_DATABASE':'prestashop1760_douka_prive',
     'MYSQL_USER':'root',
     'MYSQL_PASSWORD':'1234',
 }
