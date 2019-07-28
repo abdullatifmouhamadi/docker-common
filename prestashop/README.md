@@ -96,3 +96,11 @@ docker container rm presta
 
 
 ```
+
+
+
+
+# bugs
+
+https://github.com/PrestaShop/PrestaShop/issues/10998
+

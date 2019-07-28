@@ -14,17 +14,18 @@ db_config = {
     'MYSQL_PASSWORD':'1234',
 }
 
-setup_instance(release = user_config['PRESTASHOP_RELEASE'])
-
-init_domain(db = db_config, user_config = user_config)
-
-
-copy_db(db = db_config, user_config = user_config)
+#setup_instance(release = user_config['PRESTASHOP_RELEASE'])
+#init_domain(db = db_config, user_config = user_config)
+#copy_db(db = db_config, user_config = user_config)
 
 build_image(user_config['PRESTASHOP_RELEASE'])
 
 
 
+
+# bugs to correct
+#1 /home/prestashopd/instances/1.7.6.0/app/config/themes/classic/shop1.json -> replace directory to /usr/html/
+#2 rm /home/prestashopd/instances/1.7.6.0/app/var/cache
 
 
 # todo
