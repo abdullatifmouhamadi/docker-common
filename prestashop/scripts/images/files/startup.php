@@ -13,19 +13,18 @@ class WebserviceKeyMD extends ObjectModel {
     public static function getAccountId($auth_key)
     {
         return Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
-                SELECT id_webservice_account
-                FROM `' . _DB_PREFIX_ . 'webservice_account`
-                WHERE `key` = "' . pSQL($auth_key) . '"');
+        SELECT id_webservice_account
+        FROM `' . _DB_PREFIX_ . 'webservice_account`
+        WHERE `key` = "' . pSQL($auth_key) . '"');
     }
 }
 
 
 //$methods = array('GET', 'PUT', 'POST', 'DELETE', 'HEAD');
 $methods = array('GET'=>true, 'PUT'=>true, 'POST'=>true, 'DELETE'=>true, 'HEAD'=>true);
-
-$methods_put_post_delete = array('PUT'=>true, 'POST'=>true, 'DELETE'=>true,);
-$methods_post_delete = array('POST'=>true, 'DELETE'=>true);
-$methods_delete = array('DELETE'=>true);
+$methods_put_post_delete = $methods;//array('PUT'=>true, 'POST'=>true, 'DELETE'=>true,);
+$methods_post_delete = $methods;//array('POST'=>true, 'DELETE'=>true);
+$methods_delete = $methods;//array('DELETE'=>true);
 $permissions = array(
     'addresses' => $methods,
     'carriers' => $methods,
@@ -117,8 +116,6 @@ $id_account = WebserviceKeyMD::getAccountId($api_key);
 
 WebserviceKey::setPermissionForAccount($id_account, $permissions);
 
-var_dump($id_account);
-
-
+//var_dump($id_account);
 
 die();
