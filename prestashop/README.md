@@ -83,6 +83,7 @@ docker run --detach \
 --name presta \
 --publish 9086:80 \
 --mount type=bind,source=/home/prestashopd/domains/localhost:9086/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+--mount type=bind,source=/home/prestashopd/domains/localhost:9086/usr/html/startup.php,target=/usr/html/startup.php \
 prestashop1760:latest
 
 

@@ -4,7 +4,7 @@ import sh, contextlib, os
 from config import PRESTASHOPD_USERS_DIR
 import sys
 from utils import logi, loge, replace
-from instances import dump_path, _dump_filename, _install_dir, _database_name
+from instances import dump_path, _dump_filename, _install_dir, _database_name, _release_dir
 from config import ( MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD )
 
 from sh import cp, sed, mysql
@@ -28,16 +28,29 @@ def configure_configfiles(db, user_config):
     user_database = db['MYSQL_DATABASE']
     template_db   = _database_name(release)
 
-
-    domain_dir    = domain_path(domain, release)
-    parameter_dir = domain_dir + 'app/config/'
-    parameter_file= parameter_dir + 'parameters.php'
+    # parameters config
+    domain_dir     = domain_path(domain, release)
+    parameter_dir  = domain_dir + 'app/config/'
+    parameter_file = parameter_dir + 'parameters.php'
     if not os.path.isdir( parameter_dir ):
         mkdir("-p", parameter_dir )
 
-
     parameter_srcpath = _install_dir(release) + 'app/config/parameters.php'
     cp("-rf", parameter_srcpath, parameter_dir)
+
+
+    # startup script config
+    startupscript_dir  = domain_dir + 'usr/html/'
+    startupscript_file = startupscript_dir + 'startup.php'
+    if not os.path.isdir( startupscript_dir ):
+        mkdir("-p", startupscript_dir )
+
+    startupscript_srcpath = _release_dir(release) + 'files/startup.php'
+    cp("-rf", startupscript_srcpath, startupscript_dir)
+
+
+
+
     replace(old  = "'database_host' => 'localhost',", 
             new  = "'database_host' => '{}',".format(db['MYSQL_HOST']), 
             file = parameter_file)
