@@ -14,9 +14,9 @@ db_config = {
     'MYSQL_PASSWORD':'1234',
 }
 
-#setup_instance(release = user_config['PRESTASHOP_RELEASE'])
-#init_domain(db = db_config, user_config = user_config)
-#copy_db(db = db_config, user_config = user_config)
+setup_instance(release = user_config['PRESTASHOP_RELEASE'])
+init_domain(db = db_config, user_config = user_config)
+copy_db(db = db_config, user_config = user_config)
 
 build_image(user_config['PRESTASHOP_RELEASE'])
 

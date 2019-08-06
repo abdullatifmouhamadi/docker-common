@@ -96,10 +96,13 @@ $permissions = array(
 );
 
 
-
 $api_key = "84247accade94a95b2d7a553842df989";
 
 //$a = Configuration::get('PS_WEBSERVICE');
+
+#Configuration::updateValue('PS_SHOP_DOMAIN', $domain);
+#Configuration::updateValue('PS_SHOP_DOMAIN_SSL', $domain);
+
 
 Configuration::updateValue('PS_REWRITING_SETTINGS', "1");
 Configuration::updateValue('PS_WEBSERVICE', "1");

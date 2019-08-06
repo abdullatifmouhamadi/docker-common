@@ -35,6 +35,10 @@ ADD files/nginx.conf /etc/nginx/
 ADD files/php-fpm.conf /etc/php7/
 ADD files/php.ini /etc/php7/
 
+
+ADD files/startup.php /usr/html/
+RUN chmod +x /usr/html/startup.php
+
 ADD files/run.sh /
 RUN chmod +x /run.sh
 

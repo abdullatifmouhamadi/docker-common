@@ -86,6 +86,10 @@ docker run --detach \
 prestashop1760:latest
 
 
+docker exec presta bash -c "php /usr/html/startup.php"
+
+
+
 
 
 
