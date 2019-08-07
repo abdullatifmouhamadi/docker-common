@@ -19,6 +19,10 @@ class WebserviceKeyMD extends ObjectModel {
     }
 }
 
+$API_KEY = "84247accade94a95b2d7a553842df989";
+
+$DOMAIN  = "localhost";
+
 
 //$methods = array('GET', 'PUT', 'POST', 'DELETE', 'HEAD');
 $methods = array('GET'=>true, 'PUT'=>true, 'POST'=>true, 'DELETE'=>true, 'HEAD'=>true);
@@ -96,29 +100,36 @@ $permissions = array(
 );
 
 
-$api_key = "84247accade94a95b2d7a553842df989";
-
 //$a = Configuration::get('PS_WEBSERVICE');
+$url = ShopUrl::getShopUrls(Configuration::get('PS_SHOP_DEFAULT'))->where('main', '=', 1)->getFirst();
+if ($url)
+{
+    $url->domain = $DOMAIN;
+    $url->domain_ssl = $DOMAIN;
+    $url->save();
 
-#Configuration::updateValue('PS_SHOP_DOMAIN', $domain);
-#Configuration::updateValue('PS_SHOP_DOMAIN_SSL', $domain);
+    // Then, we update the configuration table
+    Configuration::updateValue('PS_SHOP_DOMAIN', $DOMAIN);
+    Configuration::updateValue('PS_SHOP_DOMAIN_SSL', $DOMAIN);
+}
+
 
 
 Configuration::updateValue('PS_REWRITING_SETTINGS', "1");
 Configuration::updateValue('PS_WEBSERVICE', "1");
-$exists = WebserviceKey::isKeyActive($api_key);
+$exists = WebserviceKey::isKeyActive($API_KEY);
 
 if(!$exists) {
         $ws = new WebserviceKey;
-        $ws->key = $api_key;
+        $ws->key = $API_KEY;
         $res = $ws->add();
 }
 
-$exists = WebserviceKey::isKeyActive($api_key);
-$id_account = WebserviceKeyMD::getAccountId($api_key);
+$exists = WebserviceKey::isKeyActive($API_KEY);
+$id_account = WebserviceKeyMD::getAccountId($API_KEY);
 
 WebserviceKey::setPermissionForAccount($id_account, $permissions);
 
-//var_dump($id_account);
+var_dump('\n Okay masta \n');
 
 die();

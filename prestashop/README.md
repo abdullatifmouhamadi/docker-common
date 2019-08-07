@@ -92,8 +92,6 @@ docker exec presta bash -c "php /usr/html/startup.php"
 
 
 
-
-
 docker container exec -it presta bash
 
 
