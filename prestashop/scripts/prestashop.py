@@ -70,6 +70,9 @@ def install(installDir, domain, db_server, db_name, db_user, db_password):
     log( "Removing install dir ... " )
     rm("-rf", installDir + 'install')
 
+    log( "Removing var/cache/prod ...")
+    rm("-rf", installDir + 'var/cache/prod')
+
     chown("-R", APP_OWNER, installDir)
     chmod("-R", "777", installDir + 'var/')
 
