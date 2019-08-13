@@ -115,6 +115,8 @@ if ($url)
 
 
 
+Configuration::updateValue('PS_SSL_ENABLED', "1");
+Configuration::updateValue('PS_SSL_ENABLED_EVERYWHERE', "1");
 Configuration::updateValue('PS_REWRITING_SETTINGS', "1");
 Configuration::updateValue('PS_WEBSERVICE', "1");
 $exists = WebserviceKey::isKeyActive($API_KEY);

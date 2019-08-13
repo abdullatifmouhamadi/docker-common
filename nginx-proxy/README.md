@@ -49,18 +49,32 @@ nginx
 
 
 
-# prestashop mount
+########################################
+## shop 0 - douka-prive.biachara.com
 docker run --detach \
 --name douka-prive.biachara.com \
 --env "VIRTUAL_HOST=www.douka-prive.biachara.com,douka-prive.biachara.com" \
 --env "LETSENCRYPT_HOST=www.douka-prive.biachara.com,douka-prive.biachara.com" \
 --env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
 --mount type=bind,source=/home/prestashopd/domains/douka-prive.biachara.com/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
-prestashop1752:latest
+--mount type=bind,source=/home/prestashopd/domains/douka.prive.yt/usr/html/startup.php,target=/usr/html/startup.php \
+prestashop1760:latest
+
+docker exec douka.prive.yt bash -c "php /usr/html/startup.php"
 
 
+########################################
+## shop 1 - douka.prive.yt
+docker run --detach \
+--name douka.prive.yt \
+--env "VIRTUAL_HOST=www.douka.prive.yt,douka.prive.yt" \
+--env "LETSENCRYPT_HOST=www.douka.prive.yt,douka.prive.yt" \
+--env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
+--mount type=bind,source=/home/prestashopd/domains/douka.prive.yt/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+--mount type=bind,source=/home/prestashopd/domains/douka.prive.yt/usr/html/startup.php,target=/usr/html/startup.php \
+prestashop1760:latest
 
-
+docker exec douka.prive.yt bash -c "php /usr/html/startup.php"
 
 
 
