@@ -10,6 +10,8 @@ https://ie-concept.fr/docker-nginx-letsencrypt/
 
 
 
+
+
 #
 
 ```
@@ -49,6 +51,21 @@ nginx
 
 
 
+## Configure nginx 
+
+https://github.com/jwilder/nginx-proxy/blob/master/README.md#custom-nginx-configuration
+
+client_max_body_size 128M;
+
+$ { echo 'proxy_cache my-cache;'; echo 'proxy_cache_valid  200 302  60m;'; echo 'proxy_cache_valid  404 1m;' } > /home/docker/nginx-proxy/vhost.d/douka-prive.biachara.com
+
+
+
+
+####################################################################################################################################
+
+
+
 ########################################
 ## shop 0 - douka-prive.biachara.com
 docker run --detach \
@@ -57,11 +74,11 @@ docker run --detach \
 --env "LETSENCRYPT_HOST=www.douka-prive.biachara.com,douka-prive.biachara.com" \
 --env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
 --mount type=bind,source=/home/prestashopd/domains/douka-prive.biachara.com/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
---mount type=bind,source=/home/prestashopd/domains/douka.prive.yt/usr/html/startup.php,target=/usr/html/startup.php \
+--mount type=bind,source=/home/prestashopd/domains/douka-prive.biachara.com/usr/html/startup.php,target=/usr/html/startup.php \
 prestashop1760:latest
 
-docker exec douka.prive.yt bash -c "php /usr/html/startup.php"
-
+docker exec douka-prive.biachara.com bash -c "php /usr/html/startup.php"
+docker container restart douka-prive.biachara.com
 
 ########################################
 ## shop 1 - douka.prive.yt
@@ -75,7 +92,7 @@ docker run --detach \
 prestashop1760:latest
 
 docker exec douka.prive.yt bash -c "php /usr/html/startup.php"
-
+docker container restart douka.prive.yt
 
 
 

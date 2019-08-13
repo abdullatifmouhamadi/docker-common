@@ -107,3 +107,7 @@ docker container rm presta
 
 https://github.com/PrestaShop/PrestaShop/issues/10998
 
+
+
+## install thmes
+
