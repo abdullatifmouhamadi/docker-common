@@ -66,7 +66,7 @@ $ { echo 'proxy_cache my-cache;'; echo 'proxy_cache_valid  200 302  60m;'; echo 
 
 
 
-########################################
+################################################################################
 ## shop 0 - douka-prive.biachara.com
 docker run --detach \
 --name douka-prive.biachara.com \
@@ -80,7 +80,7 @@ prestashop1760:latest
 docker exec douka-prive.biachara.com bash -c "php /usr/html/startup.php"
 docker container restart douka-prive.biachara.com
 
-########################################
+################################################################################
 ## shop 1 - douka.prive.yt
 docker run --detach \
 --name douka.prive.yt \
@@ -95,5 +95,18 @@ docker exec douka.prive.yt bash -c "php /usr/html/startup.php"
 docker container restart douka.prive.yt
 
 
+################################################################################
+## shop 2 - elec.prive.yt
+docker run --detach \
+--name elec.prive.yt \
+--env "VIRTUAL_HOST=www.elec.prive.yt,elec.prive.yt" \
+--env "LETSENCRYPT_HOST=www.elec.prive.yt,elec.prive.yt" \
+--env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
+--mount type=bind,source=/home/prestashopd/domains/elec.prive.yt/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+--mount type=bind,source=/home/prestashopd/domains/elec.prive.yt/usr/html/startup.php,target=/usr/html/startup.php \
+prestashop1760:latest
+
+docker exec elec.prive.yt bash -c "php /usr/html/startup.php"
+docker container restart elec.prive.yt
 
 ```
