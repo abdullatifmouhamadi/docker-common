@@ -109,4 +109,20 @@ prestashop1760:latest
 docker exec elec.prive.yt bash -c "php /usr/html/startup.php"
 docker container restart elec.prive.yt
 
+
+################################################################################
+## shop 3 - biachara.prive.yt
+docker run --detach \
+--name biachara.prive.yt \
+--env "VIRTUAL_HOST=www.biachara.prive.yt,biachara.prive.yt" \
+--env "LETSENCRYPT_HOST=www.biachara.prive.yt,biachara.prive.yt" \
+--env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
+--mount type=bind,source=/home/prestashopd/domains/biachara.prive.yt/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
+--mount type=bind,source=/home/prestashopd/domains/biachara.prive.yt/usr/html/startup.php,target=/usr/html/startup.php \
+prestashop1760:latest
+
+docker exec biachara.prive.yt bash -c "php /usr/html/startup.php"
+docker container restart biachara.prive.yt
+
+
 ```

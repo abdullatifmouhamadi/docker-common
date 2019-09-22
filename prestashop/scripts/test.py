@@ -2,23 +2,61 @@
 from instances import setup as setup_instance, build_image
 from prestashopd import init_domain, copy_db
 
-user_config = {
-    'HOST_DOMAIN':'localhost:9086',#'douka-prive.biachara.com',
-    'PRESTASHOP_RELEASE':'1.7.6.0',
-}
+GENERATE_DOCKER_IMAGE = 1
+CREATE_SHOP           = 2
+DB_HOST               = '172.17.0.3'
+DB_USER               = 'root'
+DB_PWD                = '1234'
 
-db_config = {
-    'MYSQL_HOST':'172.17.0.2',
-    'MYSQL_DATABASE':'prestashop1760_douka_prive',
-    'MYSQL_USER':'root',
-    'MYSQL_PASSWORD':'1234',
-}
+# config
+RELEASE               = '1.7.6.1'
+ACTION                = CREATE_SHOP#GENERATE_DOCKER_IMAGE #CREATE_SHOP
 
-setup_instance(release = user_config['PRESTASHOP_RELEASE'])
-init_domain(db = db_config, user_config = user_config)
-copy_db(db = db_config, user_config = user_config)
+# create docker image
+DOCKER_IMAGE_HOST     = 'localhost:9086'
+DOCKER_IMAGE_DB_NAME  = 'prestashop1761'
 
-build_image(user_config['PRESTASHOP_RELEASE'])
+
+# create shop
+CREATE_SHOP_HOST      = 'localhost:9087'
+CREATE_SHOP_DB_NAME   = 'prestashop1761_9087'
+
+
+setup_instance(release = RELEASE)
+
+
+if ACTION == GENERATE_DOCKER_IMAGE:
+    user_config = {
+        'HOST_DOMAIN':DOCKER_IMAGE_HOST,#'douka-prive.biachara.com',
+        'PRESTASHOP_RELEASE':RELEASE,
+    }
+    db_config = {
+        'MYSQL_HOST':DB_HOST,
+        'MYSQL_DATABASE':DOCKER_IMAGE_DB_NAME,
+        'MYSQL_USER':DB_USER,
+        'MYSQL_PASSWORD':DB_PWD,
+    }
+    init_domain(db = db_config, user_config = user_config)
+    build_image(user_config['PRESTASHOP_RELEASE'])
+    
+elif ACTION == CREATE_SHOP:
+    user_config = {
+        'HOST_DOMAIN':CREATE_SHOP_HOST,
+        'PRESTASHOP_RELEASE':RELEASE,
+    }
+    db_config = {
+        'MYSQL_HOST':DB_HOST,
+        'MYSQL_DATABASE':CREATE_SHOP_DB_NAME,
+        'MYSQL_USER':DB_USER,
+        'MYSQL_PASSWORD':DB_PWD,
+    }
+    init_domain(db = db_config, user_config = user_config)
+    copy_db(db = db_config, user_config = user_config)
+    
+else:
+    print("ERROR")
+
+
 
 
 
