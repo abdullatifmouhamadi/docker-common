@@ -119,7 +119,7 @@ docker run --detach \
 --env "LETSENCRYPT_EMAIL=maoredev.biachara@gmail.com" \
 --mount type=bind,source=/home/prestashopd/domains/biachara.prive.yt/app/config/parameters.php,target=/usr/html/app/config/parameters.php \
 --mount type=bind,source=/home/prestashopd/domains/biachara.prive.yt/usr/html/startup.php,target=/usr/html/startup.php \
-prestashop1760:latest
+prestashop1761:latest
 
 docker exec biachara.prive.yt bash -c "php /usr/html/startup.php"
 docker container restart biachara.prive.yt
